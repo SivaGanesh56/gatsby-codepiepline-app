@@ -1,0 +1,15 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      nodejs: 14
+  pre_build:
+    commands:
+      - 'yarn config set cache-folder .yarn'
+      - 'npx lerna@5.1.8 bootstrap'
+  build:
+    commands:
+      -  yarn build
+  post_build:
+    commands:
+      - aws s3 cp --recursive ./public s3://gatsbysitepoc 
