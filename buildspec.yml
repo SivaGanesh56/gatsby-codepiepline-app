@@ -5,8 +5,7 @@ phases:
       nodejs: 18
   pre_build:
     commands:
-      - 'yarn config set cache-folder .yarn'
-      - 'npx lerna@5.1.8 bootstrap'
+      - yarn
   build:
     commands:
       -  yarn build
