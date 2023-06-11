@@ -5,10 +5,10 @@ phases:
       nodejs: 18
   pre_build:
     commands:
-      - yarn
+      - npm install
   build:
     commands:
-      -  yarn build
+      -  npm run build
   post_build:
     commands:
       - aws s3 cp --recursive ./public s3://gatsbysitepoc 
