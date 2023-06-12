@@ -1,3 +1,7 @@
+require("dotenv").config({
+  path: `.env`,
+});
+
 /**
  * @type {import('gatsby').GatsbyConfig}
  */
@@ -6,5 +10,5 @@ module.exports = {
     title: `gatsby-static-site`,
     siteUrl: `https://www.yourdomain.tld`,
   },
-  plugins: [],
-}
+  plugins: ["gatsby-plugin-env-variables"],
+};

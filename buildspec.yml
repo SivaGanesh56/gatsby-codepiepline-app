@@ -1,14 +1,35 @@
 version: 0.2
+
+env:
+  variables:
+    AWS_REGION: "us-east-1"
+
 phases:
   install:
     runtime-versions:
       nodejs: 18
   pre_build:
     commands:
+      - echo "Retrieving secret from AWS Secrets Manager..."
+      - |
+        SECRET_NAME="mySecrets"
+        SECRET_VALUE=$(aws secretsmanager get-secret-value --secret-id "$SECRET_NAME" --region $AWS_REGION --query SecretString --output text)
+        if [ $? -ne 0 ]; then
+          echo "Failed to retrieve secret: $SECRET_NAME"
+          exit 1
+        fi
+
+        while IFS='=' read -r key value; do
+          export "$key"="$value"
+          echo "Loaded key $key into environment variable $key"
+        done <<< "$SECRET_VALUE"
+
       - npm install
+      
   build:
     commands:
-      -  npm run build
+      - npm run build
+
   post_build:
     commands:
       - aws s3 cp --recursive ./public s3://gatsbysitepoc 
