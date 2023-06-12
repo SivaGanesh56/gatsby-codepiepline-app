@@ -7,8 +7,15 @@ require("dotenv").config({
  */
 module.exports = {
   siteMetadata: {
-    title: `gatsby-static-site`,
-    siteUrl: `https://www.yourdomain.tld`,
+    title: `siva's poc`,
+    siteUrl: `https://www.sivaganesh.com`,
   },
-  plugins: ["gatsby-plugin-env-variables"],
+  plugins: [
+    {
+      resolve: `gatsby-plugin-env-variables`,
+      options: {
+        allowList: ["MY_APP_KEY"],
+      },
+    },
+  ],
 };
