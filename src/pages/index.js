@@ -8,7 +8,7 @@ const index = () => {
       <div>
         <h1>Development Home Page</h1>
         <p>Current Env: {process.env.GATSBY_ENV}</p>
-        <p>key: {process.env.MY_APP_KEY}</p>
+        <p>key: {process.env.GATSBY_MY_APP_KEY}</p>
       </div>
     );
   }
