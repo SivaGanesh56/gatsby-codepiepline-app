@@ -8,6 +8,10 @@ phases:
   install:
     runtime-versions:
       nodejs: 18
+    commands:
+      - apt-get update
+      - apt-get install -y jq
+
   pre_build:
     commands:
       - echo "Retrieving secret from AWS Secrets Manager..."
@@ -19,13 +23,16 @@ phases:
           exit 1
         fi
 
-        while IFS='=' read -r key value; do
-          export "$key"="$value"
-          echo "Loaded key $key into environment variable $key"
-        done <<< "$SECRET_VALUE"
+        # Parse the JSON object and extract key-value pairs
+        KEYS=$(echo "$SECRET_VALUE" | jq -r 'keys | .[]')
+        for key in $KEYS; do
+          value=$(echo "$SECRET_VALUE" | jq -r ".$key")
+          export "GATSBY_$key"="$value"
+          echo "Loaded key $key into environment variable GATSBY_$key"
+        done
 
       - npm install
-      
+
   build:
     commands:
       - printenv
@@ -33,4 +40,4 @@ phases:
 
   post_build:
     commands:
-      - aws s3 cp --recursive ./public s3://gatsbysitepoc 
+      - aws s3 cp --recursive ./public s3://gatsbysitepoc
