@@ -29,11 +29,15 @@ exports.createPages = async ({ actions, graphql }) => {
 };
 
 exports.onPostBuild = async ({}) => {
-  const s3 = new AWS.S3({});
+  const s3 = new AWS.S3({
+    accessKeyId: S3_ACCESS_KEY,
+    secretAccessKey: S3_SECRET_ACCESS_KEY,
+  });
 
   try {
     const data = {
       time: new Date().toString(),
+      key: "value",
     };
 
     await s3
