@@ -14,6 +14,7 @@
     "clean": "gatsby clean"
   },
   "dependencies": {
+    "aws-sdk": "^2.1395.0",
     "dotenv": "^16.1.4",
     "gatsby": "^5.10.0",
     "gatsby-plugin-env-variables": "^2.3.0",
