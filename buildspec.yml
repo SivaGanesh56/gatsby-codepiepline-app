@@ -8,9 +8,6 @@ phases:
   install:
     runtime-versions:
       nodejs: 18
-    commands:
-      - apt-get update
-      - apt-get install -y jq
 
   pre_build:
     commands:
