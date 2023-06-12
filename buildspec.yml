@@ -28,6 +28,7 @@ phases:
       
   build:
     commands:
+      - printenv
       - npm run build
 
   post_build:
