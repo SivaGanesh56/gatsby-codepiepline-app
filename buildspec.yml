@@ -22,9 +22,10 @@ phases:
 
         # Parse the JSON object and extract key-value pairs
         KEYS=$(echo "$SECRET_VALUE" | jq -r 'keys | .[]')
+
         for key in $KEYS; do
           value=$(echo "$SECRET_VALUE" | jq -r ".$key")
-          export "$key"="$value"  # Export the original key without adding the prefix
+          export "$key"="$value"
           echo "Loaded key $key into environment variable $key"
         done
 
