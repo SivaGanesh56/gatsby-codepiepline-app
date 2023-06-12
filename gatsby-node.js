@@ -29,6 +29,7 @@ exports.createPages = async ({ actions, graphql }) => {
 };
 
 exports.onPostBuild = async ({}) => {
+  const { S3_ACCESS_KEY, S3_SECRET_ACCESS_KEY } = process.env;
   const s3 = new AWS.S3({
     accessKeyId: S3_ACCESS_KEY,
     secretAccessKey: S3_SECRET_ACCESS_KEY,
