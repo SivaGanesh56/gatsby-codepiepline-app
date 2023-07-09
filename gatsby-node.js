@@ -43,7 +43,7 @@ exports.onPostBuild = async ({}) => {
 
     await s3
       .putObject({
-        Bucket: "gatsbysitepoc",
+        Bucket: "testbucket5356",
         Key: "outputFile.json",
         Body: JSON.stringify(data),
       })
