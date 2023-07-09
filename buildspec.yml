@@ -7,6 +7,22 @@ phases:
 
   pre_build:
     commands:
+      - echo "Retrieving secret from AWS Secrets Manager..."
+      - |
+        SECRET_VALUE=$(aws secretsmanager get-secret-value --secret-id "$SECRET_NAME" --region $AWS_REGION --query SecretString --output text)
+        if [ $? -ne 0 ]; then
+          echo "Failed to retrieve secret: $SECRET_NAME"
+          exit 1
+        fi
+
+        # Parse the JSON object and extract key-value pairs
+        KEYS=$(echo "$SECRET_VALUE" | jq -r 'keys | .[]')
+
+        for key in $KEYS; do
+          value=$(echo "$SECRET_VALUE" | jq -r ".$key")
+          export "$key"="$value"
+          echo "Loaded key $key into environment variable $value"
+        done
 
       - npm install
 
