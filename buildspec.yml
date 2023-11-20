@@ -24,12 +24,12 @@ phases:
       #     echo "Loaded key $key into environment variable $value"
       #   done
 
-      - npm install
+      # - npm install
 
   build:
     commands:
       - printenv
-      - npm run build
+      # - npm run build
 
   # post_build:
   #   commands:
