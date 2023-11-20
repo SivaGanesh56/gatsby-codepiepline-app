@@ -31,6 +31,6 @@ phases:
       - printenv
       - npm run build
 
-  post_build:
-    commands:
-      - aws s3 cp --debug --recursive ./public s3://testbucket5356
+  # post_build:
+  #   commands:
+  #     - aws s3 cp --debug --recursive ./public s3://testbucket5356
