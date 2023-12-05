@@ -33,4 +33,4 @@ phases:
 
   post_build:
     commands:
-      - aws s3 cp --debug --recursive ./public s3://testbucket5356
+      - aws s3 cp --debug --recursive ./public s3://mycdnbucket2
