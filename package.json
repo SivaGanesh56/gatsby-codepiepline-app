@@ -12,7 +12,7 @@
     "build": "gatsby build",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "deploy": "gatsby-plugin-s3 deploy --yes && aws cloudfront create-invalidation --distribution-id $DISTRIBUTION --paths \"/*\""
+    "deploy": "gatsby-plugin-s3 deploy --yes"
   },
   "dependencies": {
     "aws-sdk": "^2.1395.0",
