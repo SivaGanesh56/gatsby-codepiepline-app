@@ -33,4 +33,5 @@ phases:
 
   post_build:
     commands:
-      - aws s3 cp --debug --recursive ./public s3://mycdnbucket2
+      - npm run deploy
+      # - aws s3 cp --sse --recursive ./public s3://mycdnbucket2
